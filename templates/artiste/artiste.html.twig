@@ -7,20 +7,26 @@
 {% block body %}
 
 <h1 class="text-center display-4">
-Fiche de l'artiste
+    Fiche  <span class="badge rounded-pill bg-info text-decoration-none">{{ artiste.nom }}</span>
 </h1>
 
-<div class="d-flex justify-content-center align-items-center my-5 text-dark">
-    <div class="card">
+<div class="container my-5">
+    <div class="card text-dark">
         <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <img src="{{ artiste.photo }}" class="img-fluid rounded-start" alt="Image de profil {{ artiste.nom }}" style="object-fit: cover; width: 100%; height: 100%;">
+            <div class="col-md-4 d-flex justify-content-center align-items-center bg-dark">
+                <div style="height: 300px; overflow: hidden;">
+                    <img src="{{ artiste.photo }}" class="img-fluid rounded-start" alt="Image de profil {{ artiste.nom }}" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title">
-                        {{ artiste.nom }}
-                    </h2>
+                    <div class="d-flex justify-content-between">
+                        <h2 class="card-title">
+                            {{ artiste.nom }} 
+                        </h2>
+                        <a href="{{ path('app_artistes') }}" class="btn btn-warning btn-sm"><i class="bi bi-arrow-left-circle"></i> Retour</a>
+                    </div>
+
                     <p class="card-text fw-bold">
                         {{ artiste.type|capitalize }}
                         <br>
@@ -35,7 +41,7 @@ Fiche de l'artiste
                     </p>
                 </div>
                 <div class="card-footer">
-<a href="http://{{ artiste.siteWeb|url_encode }}" class="text-decoration-none" target="_blank">Son site web</a>
+                    <a href="http://{{ artiste.siteWeb|url_encode }}" class="text-decoration-none" target="_blank">Son site web</a>
                 </div>
                 <div class="card-footer">
                     <p class="lead">
@@ -58,7 +64,9 @@ Fiche de l'artiste
                     {% for album in artiste.albums %}
                     <tr>
                         <td>
-                            <img src="{{ album.image }}" alt="Image de l'album {{ album.titre }}" class="img-fluid rounded" style="max-width: 100px;">
+                            <div class="image-container">
+                                <img src="{{ album.image }}" alt="Image de l'album {{ album.titre }}" class="img-fluid rounded" style="width: 100px; height: 100px; object-fit: cover;">
+                            </div>
                         </td>
                         <td>
                             {{ album.titre }}
@@ -76,5 +84,7 @@ Fiche de l'artiste
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}

@@ -349,7 +349,7 @@ section.features-area.features-one {
 
 
 /* ===== error pages ===== */
-/* ===== Buttons Css ===== */
+
 .error-content .primary-btn {
     background: var(--primary);
     color: var(--white);
@@ -448,3 +448,13 @@ section.features-area.features-one {
         width: 100%;
     }
 }
+
+
+
+/*===== FICHE ARTISTE =====*/
+  .image-container {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+  }
+
