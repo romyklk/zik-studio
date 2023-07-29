@@ -17,7 +17,7 @@ class ArtisteController extends AbstractController
         if (!$artistes) {
             throw $this->createNotFoundException('Aucun artiste trouvé');
         }
-        return $this->render('artiste/listeArtistes.html.twig', [
+        return $this->render('artiste/index.html.twig', [
             'artistes' => $artistes
         ]);
     }
@@ -29,7 +29,7 @@ class ArtisteController extends AbstractController
         if (!$artiste) {
             throw $this->createNotFoundException('Aucun artiste trouvé');
         }
-        return $this->render('artiste/artiste.html.twig', [
+        return $this->render('artiste/fiche.html.twig', [
             'artiste' => $artiste
         ]);
     }
