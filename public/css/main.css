@@ -1,0 +1,450 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #164B60;
+    color: white;
+    font-family: 'Roboto', sans-serif, Arial;
+}
+
+/* Header */
+header {
+background: #164B60 !important;
+}
+
+header .navbar-brand {
+    color: white;
+}
+
+header .navbar-nav .nav-link {
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif, Arial;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 70px;
+}
+
+footer {
+    flex-shrink: 0;
+    background: #164B60 !important;
+}
+
+
+/* Home Page */
+/* ===== Buttons Css ===== */
+.header-one .header-content-area .primary-btn-outline {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.header-one .header-content-area .active.primary-btn-outline,
+.header-one .header-content-area .primary-btn-outline:hover,
+.header-one .header-content-area .primary-btn-outline:focus {
+    background: var(--primary-dark);
+    color: var(--white);
+}
+
+.header-one .header-content-area .deactive.primary-btn-outline {
+    color: var(--dark-3);
+    border-color: var(--gray-4);
+    pointer-events: none;
+}
+
+/*===== HEADER ONE =====*/
+.header-one {
+    position: relative;
+}
+
+.header-one .header-content-area {
+    background-color: var(--primary);
+    position: relative;
+    padding: 130px 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .header-one .header-content-area {
+        padding: 100px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-one .header-content-area {
+        padding: 60px 0;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .header-one .header-content-area {
+        height: 900px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-one .header-content-area {
+        height: 550px;
+    }
+}
+
+.header-one .header-content-area .primary-btn-outline {
+    border-color: var(--white);
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+.header-one .header-content-area .primary-btn-outline:hover {
+    background-color: transparent;
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.header-one .header-wrapper {
+    position: relative;
+}
+
+.header-one .header-content {
+    max-width: 540px;
+    position: relative;
+    z-index: 5;
+}
+
+.header-one .header-title {
+    color: var(--white);
+    font-weight: 800;
+}
+
+.header-one .text-lg {
+    color: var(--white);
+    font-weight: 300;
+    margin-top: 16px;
+}
+
+.header-one .header-btn {
+    margin-top: 40px;
+}
+
+.header-one .header-image {
+    text-align: center;
+}
+
+.header-one .header-image .image {
+    max-width: 730px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .header-one .header-image .image {
+        max-width: 600px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .header-one .header-image .image {
+        max-width: 550px;
+    }
+}
+
+.header-one .header-image .image img {
+    width: 100%;
+}
+
+.header-one .header-shape {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.header-one .header-shape img {
+    width: 100%;
+}
+
+
+/*===== BOTTOM =====*/
+/* ===== Buttons Css ===== */
+.features-style-one .primary-btn-outline {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.features-style-one .active.primary-btn-outline,
+.features-style-one .primary-btn-outline:hover,
+.features-style-one .primary-btn-outline:focus {
+    background: var(--primary-dark);
+    color: var(--white);
+}
+
+.features-style-one .deactive.primary-btn-outline {
+    color: var(--dark-3);
+    border-color: var(--gray-4);
+    pointer-events: none;
+}
+
+/*===========================
+  Features One CSS 
+===========================*/
+.features-one {
+    background-color: var(--light-2);
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.features-one .section-title {
+    padding-bottom: 10px;
+}
+
+.features-one .title {
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 55px;
+}
+
+@media (max-width: 767px) {
+    .features-one .title {
+        font-size: 30px;
+        line-height: 35px;
+    }
+}
+
+.features-one .text {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--dark-3);
+    margin-top: 24px;
+}
+
+.features-style-one {
+    background-color: var(--white);
+    padding: 40px 20px;
+    margin-top: 40px;
+    box-shadow: var(--shadow-2);
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.features-style-one:hover {
+    box-shadow: var(--shadow-4);
+}
+
+.features-style-one .features-icon {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 40px;
+    color: var(--primary);
+    border: 2px solid rgba(187, 187, 187, 0.192);
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+@media (max-width: 767px) {
+    .features-style-one .features-icon {
+        height: 70px;
+        width: 70px;
+        line-height: 70px;
+        font-size: 35px;
+    }
+}
+
+.features-style-one:hover .features-icon {
+    border-color: transparent;
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.features-style-one .features-content {
+    margin-top: 24px;
+}
+
+.features-style-one .features-title {
+    font-size: 26px;
+    line-height: 35px;
+    font-weight: 600;
+    color: var(--black);
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px),
+(max-width: 767px) {
+    .features-style-one .features-title {
+        font-size: 22px;
+    }
+}
+
+.features-style-one .text {
+    color: var(--dark-3);
+    margin-top: 16px;
+}
+
+.features-style-one .features-btn {
+    margin-top: 32px;
+}
+
+section.features-area.features-one {
+    padding: 0;
+}
+
+.header-content-area {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+
+/* CARD ARTIST */
+ 
+                .custom-card {
+                    max-width: 350px;
+                }
+        
+                .custom-card .card-footer {
+                    background-color: #f8f9fa;
+                    padding: 8px;
+                }
+        
+                .custom-card .random-content {
+                    margin: 10px 0;
+                    background-color: #f8f9fa;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                }
+        
+                /* Styles pour créer le cercle autour de l'image */
+                .custom-card .rounded-image {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    /* Cela rend l'image ronde en utilisant un cercle égale */
+                    overflow: hidden;
+                    /* Masque tout contenu débordant du cercle */
+                    margin: 0 auto;
+                    /* Centrer l'image horizontalement */
+                }
+
+        
+                .custom-card .rounded-image img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    /* Ajuste l'image à l'intérieur du cercle */
+                }
+
+
+/* ===== error pages ===== */
+/* ===== Buttons Css ===== */
+.error-content .primary-btn {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: var(--shadow-2);
+}
+
+.error-content .active.primary-btn,
+.error-content .primary-btn:hover,
+.error-content .primary-btn:focus {
+    background: var(--primary-dark);
+    color: var(--white);
+    box-shadow: var(--shadow-4);
+}
+
+.error-content .deactive.primary-btn {
+    background: var(--gray-4);
+    color: var(--dark-3);
+    pointer-events: none;
+}
+
+/*===== ERROR ONE Style =====*/
+.error-content {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.error-content .error-404 {
+    font-size: 98px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 90px;
+}
+
+.error-content .sub-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 16px;
+}
+
+.error-content .text {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--dark-3);
+    margin-top: 8px;
+}
+
+.error-content .error-form {
+    max-width: 410px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 40px;
+    position: relative;
+}
+
+.error-content .error-form i {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.error-content .error-form input {
+    width: 100%;
+    height: 46px;
+    padding-left: 60px;
+    padding-right: 30px;
+    border-radius: 50px;
+    border: 2px solid var(--gray-4);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark-3);
+}
+
+.error-content .error-form input:focus {
+    border-color: var(--primary);
+}
+
+.error-content .error-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media (max-width: 767px) {
+    .error-content .error-btn {
+        position: relative;
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    .error-content .primary-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Controller;
+
+use App\Repository\ArtisteRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ArtisteController extends AbstractController
+{
+    #[Route('/artistes', name: 'app_artistes', methods: ['GET'])]
+    public function index(ArtisteRepository $artisteRepository): Response
+    {
+
+        $artistes = $artisteRepository->findAll();
+        if (!$artistes) {
+            throw $this->createNotFoundException('Aucun artiste trouvé');
+        }
+        return $this->render('artiste/listeArtistes.html.twig', [
+            'artistes' => $artistes
+        ]);
+    }
+
+    #[Route('/artiste/{slug}', name: 'app_artiste_show', methods: ['GET'])]
+    public function show(ArtisteRepository $artisteRepository, string $slug): Response
+    {
+        $artiste = $artisteRepository->findOneBy(['slug' => $slug]);
+        if (!$artiste) {
+            throw $this->createNotFoundException('Aucun artiste trouvé');
+        }
+        return $this->render('artiste/artiste.html.twig', [
+            'artiste' => $artiste
+        ]);
+    }
+}

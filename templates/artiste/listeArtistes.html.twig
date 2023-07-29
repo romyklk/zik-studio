@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ parent() }} | Liste des artistes
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center display-4  my-5">
+Liste de nos artistes
+</h1>
+
+<div class="row justify-content-space-center">
+
+{% for artiste in artistes %}
+
+            <div class="card text-center custom-card mx-auto my-3 bg-dark py-2">
+            <!-- Titre en haut de la card -->
+            <div class="card-header">
+                <h5>
+                    {{ artiste.nom }}
+                </h5>
+            </div>
+            <!-- Image centrée au-dessous du titre -->
+            
+            <div class="card-body">
+                <!-- Div pour le cercle -->
+                
+                <div class="rounded-image">
+                    <img src="{{artiste.photo}}" alt="Image">
+                </div>
+                
+                {% if artiste.albums|length >1 %}
+                <a href="" class="badge rounded-pill bg-success text-decoration-none mt-3">{{artiste.albums|length}} albums </a>
+                {% else %}
+                <a href="" class="badge rounded-pill bg-success text-decoration-none mt-3">{{artiste.albums|length}} album </a>
+                {% endif %}
+                
+            </div>
+            <!-- Mini texte en bas de la card -->
+            <div class="card-footer text-muted">
+                <div class="random-content">
+                    {{ artiste.description|slice(0, 100) }}{% if artiste.description|length > 100 %}...{% endif %}
+                </div>
+            </div>
+            <!-- Card Footer en bas de la card -->
+            <div class="card-footer">
+                <div class="random-content text-dark">
+                <span class="text-primary"> {{ artiste.type }} </span> -   
+
+                <span class="text-info">
+                 {{ artiste.genreMusical }} <i class="bi bi-music-note-beamed"></i>
+                </span>
+
+                </div>
+                <hr>
+                <a href="http://{{ artiste.siteWeb }}" class="text-decoration-none text-dark" target="_blank"> voir son site web </a><br>
+                
+                <a href="{{ path('app_artiste_show', {'slug': artiste.slug}) }}" class="btn btn-outline-primary btn-sm mt-3">Découvrir </a>
+            </div>
+        </div>
+{% endfor %}
+</div>
+
+{% endblock %}
