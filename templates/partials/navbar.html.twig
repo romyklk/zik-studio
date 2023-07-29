@@ -18,11 +18,19 @@
               Home
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{path('app_artistes')}}">
-              Nos musiciens
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Réalisations
             </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownOther">
+              <li><a class="dropdown-item" href="{{path('app_artistes')}}">Les artistes</a></li>
+              <li><a class="dropdown-item" href="{{path('app_albums')}}">Les disques</a></li>
+              <li><a class="dropdown-item" href="#">Record</a></li>
+              <!-- Ajoutez d'autres options de menu ici -->
+            </ul>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#">
               Nos groupes

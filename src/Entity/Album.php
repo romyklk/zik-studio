@@ -35,9 +35,13 @@ class Album
     #[ORM\OneToMany(mappedBy: 'album', targetEntity: Morceau::class)]
     private Collection $morceaus;
 
+    #[ORM\ManyToMany(targetEntity: Style::class, mappedBy: 'albums')]
+    private Collection $styles;
+
     public function __construct()
     {
         $this->morceaus = new ArrayCollection();
+        $this->styles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +134,33 @@ class Album
             if ($morceau->getAlbum() === $this) {
                 $morceau->setAlbum(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Style>
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    public function addStyle(Style $style): static
+    {
+        if (!$this->styles->contains($style)) {
+            $this->styles->add($style);
+            $style->addAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): static
+    {
+        if ($this->styles->removeElement($style)) {
+            $style->removeAlbum($this);
         }
 
         return $this;

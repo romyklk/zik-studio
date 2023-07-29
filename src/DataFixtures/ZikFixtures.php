@@ -5,25 +5,27 @@ namespace App\DataFixtures;
 use DateTime;
 use Faker\Factory;
 use App\Entity\Album;
+use App\Entity\Style;
 use DateTimeImmutable;
 use App\Entity\Artiste;
 use App\Entity\Morceau;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\ORM\Mapping\Id;
 
 class ZikFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        $faker = Factory::create();
 
         // Tableau d'images unsplash
         $images = [];
         for ($i = 0; $i < 50; $i++) {
             // UNSPLASH API INTEGRATION 
             $apiKey = 'lHI2E7pIyVDoVnz6WkrTBpHBG2bkn9zkTBpE6dc-LdQ';
-            $url = 'https://api.unsplash.com/photos/random/?client_id=' . $apiKey.'&query=music';
+            $url = 'https://api.unsplash.com/photos/random/?client_id=' . $apiKey . '&query=music';
 
             $response = file_get_contents($url);
             // Convertir la réponse JSON en tableau associatif
@@ -34,12 +36,29 @@ class ZikFixtures extends Fixture
             $images[] = $imageUrl;
         }
 
+
+
+        // Création des styles
+
+        $typeMusik = ['rock', 'pop', 'rap', 'jazz', 'blues', 'classique', 'reggae', 'electro', 'metal', 'country', 'variété', 'folk', 'funk', 'soul', 'disco', 'techno', 'hip-hop', 'rnb', 'dance', 'latino', 'punk', 'reggaeton', 'house', 'chanson française', 'hard rock', 'indie', 'alternatif', 'new wave', 'chill', 'lounge', 'ambiance', 'relaxation', 'enfants'];
+
+        foreach ($typeMusik as $type) {
+            $style = new Style();
+            $style->setNom($type)
+                ->setCouleur($faker->safeColorName());
+            $manager->persist($style);
+            $manager->flush();
+        }
+
         // Création des artistes
         $artistes = [];
-        $type = ['groupe', 'solo','dj','duo', 'orchestre'];
-        $typeMusik = ['rock', 'pop', 'rap', 'jazz', 'blues', 'classique', 'reggae', 'electro', 'metal', 'country', 'variété', 'folk', 'funk', 'soul', 'disco', 'techno', 'hip-hop', 'rnb', 'dance', 'latino', 'punk', 'reggaeton', 'house', 'chanson française', 'hard rock', 'indie', 'alternatif', 'new wave', 'chill', 'lounge', 'ambiance', 'relaxation', 'enfants'];
+        $type = ['groupe', 'solo', 'dj', 'duo', 'orchestre'];
+
+
         $genre = ["men", "women"];
         $gender = ["male", "female"];
+
+        $styles = $manager->getRepository(Style::class)->findAll();
 
         for ($i = 0; $i < 10; $i++) {
             $startDate = strtotime('1950-01-01');
@@ -51,6 +70,8 @@ class ZikFixtures extends Fixture
 
             $artiste = new Artiste();
 
+
+
             $contactGender = mt_rand(0, 1);
             if ($contactGender == 0) {
                 $typeGender = "men";
@@ -58,13 +79,15 @@ class ZikFixtures extends Fixture
                 $typeGender = "women";
             }
 
+            $artisteStyle = $faker->randomElement($styles);
+
             $artiste->setNom($faker->name($gender[$contactGender]))
                 ->setDescription($faker->text(255))
                 ->setSiteWeb('www.' . $slugify->slugify($artiste->getNom()) . '.com')
                 ->setSlug($slugify->slugify($artiste->getNom()))
                 ->setPhoto("https://randomuser.me/api/portraits/" . $typeGender . "/" . mt_rand(1, 99) . ".jpg")
                 ->setType($faker->randomElement($type))
-                ->setGenreMusical($faker->randomElement($typeMusik))
+                ->setStyle($artisteStyle->getId())
                 ->setCreatedAt($randomDateTime);
             $manager->persist($artiste);
             $artistes[] = $artiste;
@@ -91,6 +114,7 @@ class ZikFixtures extends Fixture
                 ->setDateSortie($randomDateTime)
                 ->setImage($faker->randomElement($images))
                 ->setArtiste($randomArtiste)
+                ->addStyle($styles[array_rand($styles)])
                 ->setCreatedAt($randomDateTime);
             $manager->persist($album);
 
@@ -121,8 +145,6 @@ class ZikFixtures extends Fixture
 
             $albums[] = $album;
         }
-
-        $manager->flush();
 
         $manager->flush();
     }

@@ -37,10 +37,10 @@ class Artiste
     private Collection $albums;
 
     #[ORM\Column(length: 255)]
-    private ?string $genreMusical = null;
+    private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $style = null;
 
     public function __construct()
     {
@@ -154,17 +154,6 @@ class Artiste
         return $this;
     }
 
-    public function getGenreMusical(): ?string
-    {
-        return $this->genreMusical;
-    }
-
-    public function setGenreMusical(string $genreMusical): static
-    {
-        $this->genreMusical = $genreMusical;
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {
@@ -176,5 +165,22 @@ class Artiste
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(string $style): static
+    {
+        $this->style = $style;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getNom();
     }
 }

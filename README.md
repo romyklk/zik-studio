@@ -57,4 +57,15 @@ L'objectif de ce projet est découvrir les bases du développement web. avec le 
 
 3. Créer un controller pour gérer les artistes avec la commande:
    `symfony console make:controller` nommé `ArtisteController`
-   - Créer une route pour la page d'accueil `/`
+   - Créer une route pour la page d'accueil `/artistes` qui affiche la liste des artistes`
+   - Créer une route pour la page de détail d'un artiste `/artiste/{slug}` qui affiche les détails d'un artiste
+
+4. Ajout de l'entité `style` avec les champs suivants:
+   - `nom` de type `string` 255 caractères non null
+   - `couleur` de type `string` 255 caractères non null
+   - `albums` de type `relation` avec l'entité `Album` non null(ManyToMany) qui donne naissance à une table de liaison `album_style`
+
+5. Créer un controller pour gérer les albums avec la commande:
+   `symfony console make:controller` nommé `AlbumController`
+   - Créer une route pour la page d'accueil `/albums` qui affiche la liste des albums`
+   - Créer une route pour la page de détail d'un album `/album/{id}` qui affiche les détails d'un album
