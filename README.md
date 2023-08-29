@@ -69,3 +69,8 @@ L'objectif de ce projet est découvrir les bases du développement web. avec le 
    `symfony console make:controller` nommé `AlbumController`
    - Créer une route pour la page d'accueil `/albums` qui affiche la liste des albums`
    - Créer une route pour la page de détail d'un album `/album/{id}` qui affiche les détails d'un album
+  
+6. Optimisation des requêtes avec le `queryBuilder` et les `repository`
+
+7. Pagination des résultats avec le `knpPaginatorBundle`
+    `composer require knplabs/knp-paginator-bundle`

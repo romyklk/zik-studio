@@ -45,4 +45,18 @@ class AlbumRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+    public function allInfoAlbum()
+    {
+       
+        $query = $this->createQueryBuilder('a')
+            ->select('a','art','m')
+            ->innerJoin('a.artiste', 'art')
+            ->innerJoin('a.morceaus', 'm')
+            ->orderBy('a.titre', 'ASC')
+            ->getQuery();
+       
+        return $query->getResult();
+    }
 }

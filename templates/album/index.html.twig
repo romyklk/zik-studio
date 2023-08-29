@@ -1,63 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{{ parent() }} | Liste des albums
+	{{ parent() }}
+	| Liste des albums
 {% endblock %}
 
 {% block body %}
 
-<h1 class="text-center display-4 my-5">
-Liste de nos albums
-</h1>
+	<h1 class="text-center display-4 my-5">
+		Liste de nos albums
+	</h1>
 
-<div class="row justify-content-space-center">
-    {% for album in albums %}
-        <div class="card text-center custom-card mx-auto my-3 bg-dark py-2 album-card">
-            <!-- Titre en haut de la card -->
-            <div class="card-header">
-                <h5>
-                    {{ album.titre }}
-                </h5>
-            </div>
-            <!-- Image centrée au-dessous du titre -->
-            <div class="card-body">
-                <!-- Div pour le cercle -->
-                <div class="rounded-image">
-                    <img src="{{ album.image }}" alt="Image" style="max-width: 100%;">
-                </div>
+	<div class="row justify-content-space-center">
+		{% for album in albums %}
+			<div
+				class="card text-center custom-card mx-auto my-3 bg-dark py-2 album-card">
+				<!-- Titre en haut de la card -->
+				<div class="card-header">
+					<h5>
+						{{ album.titre }}
+					</h5>
+				</div>
+				<!-- Image centrée au-dessous du titre -->
+				<div
+					class="card-body">
+					<!-- Div pour le cercle -->
+					<div class="rounded-image">
+						<img src="{{ album.image }}" alt="Image" style="max-width: 100%;">
+					</div>
 
-                <h6 class="card-title mt-3">
-                    <a href="{{ path('app_artiste_show', {'slug': album.artiste.slug}) }}" class="badge rounded bg-info text-decoration-none text-white py-2 mb-2">
-                        {{ album.artiste.nom }}
-                    </a>
-                    <br> {{ album.dateSortie|date('Y') }}
-                </h6>
+					<h6 class="card-title mt-3">
+						<a href="{{ path('app_artiste_show', {'slug': album.artiste.slug}) }}" class="badge rounded bg-info text-decoration-none text-white py-2 mb-2">
+							{{ album.artiste.nom }}
+						</a>
+						<br>
+						{{ album.dateSortie|date('Y') }}
+					</h6>
 
-                <div class="card-text">
-                    {% for style in album.styles %}
-                        <span class="badge rounded text-decoration-none text-white py-2" style="background-color: {{ style.couleur }};">{{ style.nom }}</span>
-                        
-                    {% endfor %}
-                </div>
-                
-                {% if album.morceaus|length > 1 %}
-                    <a href="{{path('app_album_show',{'id':album.id})}}" class="btn btn-primary position-relative mt-2">
-                        Morceaux
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ album.morceaus|length }}
-                        </span>
-                    </a>
-                {% else %}
-                    <button type="button" class="btn btn-primary position-relative mt-2">
-                        Single
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ album.morceaus|length }}
-                        </span>
-                    </button>
-                {% endif %}
-            </div>
-        </div> 
-    {% endfor %}
-</div>
+					<div class="card-text">
+						{% for style in album.styles %}
+							<span class="badge rounded text-decoration-none text-white py-2" style="background-color: {{ style.couleur }};">{{ style.nom }}</span>
+
+						{% endfor %}
+					</div>
+
+					{% if album.morceaus|length > 1 %}
+						<a href="{{path('app_album_show',{'id':album.id})}}" class="btn btn-primary position-relative mt-2">
+							Morceaux
+							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+								{{ album.morceaus|length }}
+							</span>
+						</a>
+					{% else %}
+						<button type="button" class="btn btn-primary position-relative mt-2">
+							Single
+							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+								{{ album.morceaus|length }}
+							</span>
+						</button>
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+
+
+		{# pagination#}
+
+		<div class="mt-3">
+			<ul class="pagination justify-content-center">
+				{{ knp_pagination_render(albums) }}
+			</ul>
+		</div class="mt-3">
+
+
+	</div>
 
 {% endblock %}

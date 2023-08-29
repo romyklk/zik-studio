@@ -45,4 +45,16 @@ class ArtisteRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function allInfoArtiste()
+    {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a', 'al')
+                ->leftJoin('a.albums', 'al')
+                ->orderBy('a.nom', 'ASC')
+                ->getQuery()
+                ->getResult();
+        
+            return $qb;
+    }
 }
