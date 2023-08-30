@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Admin Panel
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+
+		body {
+			background: #232526; /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+		}
+		.rounded-image {
+			width: 50px;
+			height: 50px;
+			overflow: hidden;
+			border-radius: 50%;
+		}
+
+		.rounded-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center display-4 my-5">
+		<badge class="badge bg-info text-white">Admin Panel</badge>
+		Liste de nos artistes
+	</h1>
+
+	<div class="container">
+		<div class="table-responsive">
+		<a href="{{ path('app_admin_artiste_add') }} " class="btn btn-outline-info btn-sm mb-3"> <i class="bi bi-plus-circle"></i> Ajouter un artiste</a>
+			<table class="table text-white border">
+				<thead class="bg-dark text-white text-center">
+					<tr>
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Type</th>
+						<th>Site Web</th>
+						<th>Détails</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for artiste in artistes %}
+						<tr class="text-center">
+							<td>
+								<div class="d-flex flex-column align-items-center">
+									<div class="rounded-image mb-2">
+										<img src="{{ artiste.photo }}" alt="Image" class="rounded-circle">
+									</div>
+									<a href="{{ path('app_artiste_show', {'slug': artiste.slug}) }}" class="badge rounded-pill bg-success text-decoration-none">
+										{{ artiste.albums|length }}
+										{{ artiste.albums|length > 1 ? 'albums' : 'album' }}
+									</a>
+								</div>
+							</td>
+							<td>{{ artiste.nom }}</td>
+							<td>
+								{{ artiste.description|slice(0, 80) }}
+								{% if artiste.description|length > 80 %}...
+								{% endif %}
+							</td>
+							<td>{{ artiste.type }}</td>
+							<td>
+								<a href="http://{{ artiste.siteWeb }}" class="text-decoration-none text-white" target="_blank">
+									<i class="bi bi-globe"></i>
+								</a>
+							</td>
+							<td>
+								<a href="{{ path('app_artiste_show', {'slug': artiste.slug}) }}" class="btn btn-outline-info btn-sm">
+									<i class="bi bi-eye"></i>
+								</a>
+							</td>
+							<td>
+								<a href="{{ path('app_admin_artiste_edit', {'id': artiste.id}) }} " class="btn btn-outline-warning btn-sm">
+									<i class="bi bi-pencil-square"></i>
+								</a>
+								{# <a href=" {{ path('app_admin_artiste_delete', {'id': artiste.id}) }} " class="btn btn-outline-danger btn-sm">
+								<i class="bi bi-trash"></i>
+								</a>#}
+
+
+								<a href="" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modalDelete" data-bs-target="#exampleModal">
+									<i class="bi bi-trash"></i>
+								</a>
+
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="mt-3 d-flex justify-content-center">
+			<ul class="pagination">
+				{{ knp_pagination_render(artistes) }}
+			</ul>
+		</div>
+	</div>
+{% endblock %}

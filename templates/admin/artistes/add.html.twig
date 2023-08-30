@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Admin Panel | Ajout d'un artiste
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		body {
+			background: #232526;
+			/* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #414345, #232526);
+			/* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #414345, #232526);
+			/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center text-white">
+		Ajout d'un artiste
+	</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 offset-md-3 mx-auto my-3 shadow">
+
+				{{ form_start(form) }}
+				{{ form_row(form.nom) }}
+				{{ form_row(form.style) }}
+				{{ form_row(form.type) }}
+				{{ form_row(form.siteWeb) }}
+				{{ form_row(form.description) }}
+				{{ form_row(form.photo) }}
+
+				<div class="row">
+					<div class="col-md-4 mx-auto mb-4">
+						<div class="d-grid gap-2">
+							<input type="submit" class="btn btn-success" value="Ajouter">
+
+							<a href="{{ path('app_admin_artistes') }}" class="btn btn-danger">
+
+								Annuler
+							</a>
+						</div>
+
+					</div>
+				</div>
+				{{ form_end(form) }}
+
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

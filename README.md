@@ -74,3 +74,10 @@ L'objectif de ce projet est découvrir les bases du développement web. avec le 
 
 7. Pagination des résultats avec le `knpPaginatorBundle`
     `composer require knplabs/knp-paginator-bundle`
+
+8. Créer un controller pour la partie admin avec la commande:
+   `symfony console make:controller` nommé `AdminArtisteController`
+   - Créer une route pour la page d'accueil `/admin/artistes` qui affiche la liste des artistes`
+
+9. Dans le controller `AdminArtisteController`: Créer une route pour la création d'un artiste `/admin/artiste/add` qui affiche le formulaire de création d'un artiste
+   Utilser la commande `symfony console make:form` pour créer le formulaire nommé `ArtisteType`

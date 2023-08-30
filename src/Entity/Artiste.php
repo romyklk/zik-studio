@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ArtisteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
+use App\Entity\Style;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArtisteRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ArtisteRepository::class)]
 class Artiste
@@ -39,8 +41,8 @@ class Artiste
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $style = null;
+    #[ORM\ManyToOne(targetEntity: Style::class, inversedBy: 'artistes')]
+    private ?Style $style = null;
 
     public function __construct()
     {
@@ -167,20 +169,22 @@ class Artiste
         return $this;
     }
 
-    public function getStyle(): ?string
-    {
-        return $this->style;
-    }
+public function getStyle(): ?Style
+{
+    return $this->style;
+}
 
-    public function setStyle(string $style): static
-    {
-        $this->style = $style;
+public function setStyle(?Style $style): self
+{
+    $this->style = $style;
 
-        return $this;
-    }
+    return $this;
+}
+
 
     public function __toString(): string
     {
         return $this->getNom();
     }
+
 }

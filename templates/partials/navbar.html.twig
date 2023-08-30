@@ -1,67 +1,89 @@
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <!-- Logo -->
-      <a class="navbar-brand" href="{{path('app_home')}}">
-        ZiK-ApP
-      </a>
-      <!-- Navbar toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Collapse -->
-      <div class="collapse navbar-collapse justify-content-between" id="navbarScroll">
-        <!-- Nav -->
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{path('app_home')}}">
-              Home
-            </a>
-          </li>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div
+			class="container-fluid">
+			<!-- Logo -->
+			<a class="navbar-brand" href="{{path('app_home')}}">
+				ZiK-ApP
+			</a>
+			<!-- Navbar toggle -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- Collapse -->
+			<div
+				class="collapse navbar-collapse justify-content-between" id="navbarScroll">
+				<!-- Nav -->
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">
+							Home
+						</a>
+					</li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Réalisations
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownOther">
-              <li><a class="dropdown-item" href="{{path('app_artistes')}}">Les artistes</a></li>
-              <li><a class="dropdown-item" href="{{path('app_albums')}}">Les disques</a></li>
-              <li><a class="dropdown-item" href="#">Record</a></li>
-              <!-- Ajoutez d'autres options de menu ici -->
-            </ul>
-          </li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Réalisations
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownOther">
+							<li>
+								<a class="dropdown-item" href="{{path('app_artistes')}}">Les artistes</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path('app_albums')}}">Les disques</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Record</a>
+							</li>
+							<!-- Ajoutez d'autres options de menu ici -->
+						</ul>
+					</li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Nos groupes
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestion
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownOther">
-              <li><a class="dropdown-item" href="#">Artist</a></li>
-              <li><a class="dropdown-item" href="#">Album</a></li>
-              <li><a class="dropdown-item" href="#">Record</a></li>
-              <!-- Ajoutez d'autres options de menu ici -->
-            </ul>
-          </li>
-        </ul>
-        <!-- Right navigation -->
-        <div class="d-flex">
-          <div class="dropdown me-2">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person"></i> <!-- Icône person de Bootstrap Icons -->
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-              <li><a class="dropdown-item" href="#">Login</a></li>
-              <li><a class="dropdown-item" href="#">Sign Up</a></li>
-              <!-- Ajoutez d'autres options de menu ici -->
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							Nos groupes
+						</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Admin Zone
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownOther">
+							<li>
+								<a class="dropdown-item" href="{{path('app_admin_artistes')}}">Gestion musiciens</a>
+
+
+							</li>
+
+							<li>
+								<a class="dropdown-item" href="#">Album</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Record</a>
+							</li>
+							<!-- Ajoutez d'autres options de menu ici -->
+						</ul>
+					</li>
+				</ul>
+				<!-- Right navigation -->
+				<div class="d-flex">
+					<div class="dropdown me-2">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person"></i>
+							<!-- Icône person de Bootstrap Icons -->
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+							<li>
+								<a class="dropdown-item" href="#">Login</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Sign Up</a>
+							</li>
+							<!-- Ajoutez d'autres options de menu ici -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 </header>
