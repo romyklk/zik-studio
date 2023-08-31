@@ -8,8 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArtisteRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArtisteRepository::class)]
+#[UniqueEntity(fields: ['nom'], message: 'Un artiste avec ce nom existe déjà')]
 class Artiste
 {
     #[ORM\Id]
@@ -18,18 +21,25 @@ class Artiste
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    #[Assert\Length(min: 2, minMessage: 'Le nom doit faire au moins {{ limit }} caractères', max: 255, maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'La description est obligatoire')]
+    #[Assert\Length(min:10, minMessage: 'La description doit faire au moins {{ limit }} caractères')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(message: 'Le site web doit être une URL valide')]
+    #[Assert\Length(max: 255, maxMessage: 'Le site web ne doit pas dépasser {{ limit }} caractères')]
     private ?string $siteWeb = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le type est obligatoire')]
     private ?string $type = null;
 
     #[ORM\Column]

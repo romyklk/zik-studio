@@ -73,10 +73,15 @@ class AdminArtisteController extends AbstractController
         ]);
     }
 
-    #[Route('/artiste/edit/{id}', name: 'app_admin_artiste_edit', methods: ['GET', 'POST'])]
-    public function editArtiste(Artiste $artiste,Request $request,EntityManagerInterface $em,ArtisteRepository $artisteRepository): Response
+    #[Route('/artiste/edit/{slug}', name: 'app_admin_artiste_edit', methods: ['GET', 'POST'])]
+    public function editArtiste($slug,Request $request,EntityManagerInterface $em,ArtisteRepository $artisteRepository): Response
     {
-        $artiste = $artisteRepository->find($artiste);
+        $artiste = $artisteRepository->findOneBy(['slug' => $slug]);
+
+        if(!$artiste)
+        {
+            throw $this->createNotFoundException("L'artiste n'existe pas !");
+        }
 
         $form = $this->createForm(ArtisteType::class,$artiste);
         $form->handleRequest($request);
@@ -85,7 +90,7 @@ class AdminArtisteController extends AbstractController
         {
             $artiste->setSlug((new Slugify())->slugify($artiste->getNom()));
             $artiste->setCreatedAt(new \DateTimeImmutable());
-            $artiste->setPhoto('default.jpg');
+            $artiste->setPhoto('https://loremflickr.com/g/320/240/paris,girl/all');
             $em->persist($artiste);
             $em->flush();
 
@@ -107,4 +112,32 @@ class AdminArtisteController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/artiste/delete/{slug}', name: 'app_admin_artiste_delete', methods: ['GET'])]
+    public function deleteArtiste($slug,EntityManagerInterface $em,ArtisteRepository $artisteRepository): Response
+    {
+        $artiste = $artisteRepository->findOneBy(['slug' => $slug]);
+
+        $nbAlbums = $artiste->getAlbums()->count();
+
+        if(!$artiste)
+        {
+            throw $this->createNotFoundException("L'artiste n'existe pas !");
+        }
+        $em->remove($artiste);
+        $em->flush();
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->duration(5000)
+            ->ripple(true)
+            ->dismissible(true)
+            ->addSuccess("L'artiste a bien été supprimé !");
+
+        return $this->redirectToRoute('app_admin_artistes');
+    }
+
+
+
 }

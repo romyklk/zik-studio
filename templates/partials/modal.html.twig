@@ -1,19 +1,60 @@
-
-<!-- Modal -->
-<div class="modalDelete fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-dark" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+
+				<h1 class="modal-title fs-5 fw-bold text-warning" id="exampleModalLabel"></h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="modal-body">
-				...
+			<div
+				class="modal-body"><!-- ... Contenu de la modal ... -->
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+				<a href="" id="btn-action" class="btn btn-danger">Oui</a>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+// Attend que le DOM soit complètement chargé
+document.addEventListener('DOMContentLoaded', function () {
+    // Crée une instance de la modal en utilisant l'élément ayant l'ID "modalDelete"
+    let modalDelete = new bootstrap.Modal(document.getElementById('modalDelete'), {
+        keyboard: false // Désactive la fermeture modale avec la touche Échap
+    });
+
+    // Sélectionne tous les liens qui déclenchent la modal
+    let deleteLinks = document.querySelectorAll('[data-bs-target="#modalDelete"]');
+
+    // Ajoute un écouteur d'événement à chaque lien
+    deleteLinks.forEach(function (deleteLink) {
+        deleteLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Empêche le lien de naviguer vers une autre page
+
+            // Récupère les attributs du lien cliqué
+            let url = this.getAttribute('data-bs-url');
+            let title = this.getAttribute('data-bs-titre');
+            let message = this.getAttribute('data-bs-message');
+            let btnText = this.getAttribute('data-bs-button');
+
+            // Sélectionne les éléments de la modal à mettre à jour
+            let btnAction = document.getElementById('btn-action');
+            let modalTitle = document.getElementById('exampleModalLabel');
+            let modalBody = document.querySelector('#modalDelete .modal-body');
+
+            // Met à jour les éléments de la modal avec les données du lien
+            btnAction.setAttribute('href', url);
+            btnAction.innerHTML = btnText;
+            modalTitle.innerHTML = title;
+            modalBody.innerHTML = message;
+
+            // Affiche la modal
+            modalDelete.show();
+        });
+    });
+});
+
+
+</script>

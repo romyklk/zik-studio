@@ -12,7 +12,6 @@ use App\Entity\Morceau;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\ORM\Mapping\Id;
 
 class ZikFixtures extends Fixture
 {
@@ -23,23 +22,17 @@ class ZikFixtures extends Fixture
         // Tableau d'images unsplash
         $images = [];
         for ($i = 0; $i < 50; $i++) {
-            // UNSPLASH API INTEGRATION 
-            $apiKey = 'lHI2E7pIyVDoVnz6WkrTBpHBG2bkn9zkTBpE6dc-LdQ';
+            $apiKey = 'AumxasfNDANO3jmCYIFQC56O29r9r3kZBTNZROa1iFI';
             $url = 'https://api.unsplash.com/photos/random/?client_id=' . $apiKey . '&query=music';
 
             $response = file_get_contents($url);
-            // Convertir la réponse JSON en tableau associatif
             $imageData = json_decode($response, true);
 
-            // Récupérer l'URL de l'image aléatoire
             $imageUrl = $imageData['urls']['raw'];
             $images[] = $imageUrl;
         }
 
-
-
         // Création des styles
-
         $typeMusik = ['rock', 'pop', 'rap', 'jazz', 'blues', 'classique', 'reggae', 'electro', 'metal', 'country', 'variété', 'folk', 'funk', 'soul', 'disco', 'techno', 'hip-hop', 'rnb', 'dance', 'latino', 'punk', 'reggaeton', 'house', 'chanson française', 'hard rock', 'indie', 'alternatif', 'new wave', 'chill', 'lounge', 'ambiance', 'relaxation', 'enfants'];
 
         foreach ($typeMusik as $type) {
@@ -47,14 +40,12 @@ class ZikFixtures extends Fixture
             $style->setNom($type)
                 ->setCouleur($faker->safeColorName());
             $manager->persist($style);
-            $manager->flush();
         }
+        $manager->flush();
 
         // Création des artistes
         $artistes = [];
         $type = ['groupe', 'solo', 'dj', 'duo', 'orchestre'];
-
-
         $genre = ["men", "women"];
         $gender = ["male", "female"];
 
@@ -69,8 +60,6 @@ class ZikFixtures extends Fixture
             $slugify = new Slugify();
 
             $artiste = new Artiste();
-
-
 
             $contactGender = mt_rand(0, 1);
             if ($contactGender == 0) {
@@ -87,8 +76,9 @@ class ZikFixtures extends Fixture
                 ->setSlug($slugify->slugify($artiste->getNom()))
                 ->setPhoto("https://randomuser.me/api/portraits/" . $typeGender . "/" . mt_rand(1, 99) . ".jpg")
                 ->setType($faker->randomElement($type))
-                ->setStyle($artisteStyle->getId())
+                ->setStyle($artisteStyle)
                 ->setCreatedAt($randomDateTime);
+
             $manager->persist($artiste);
             $artistes[] = $artiste;
         }
@@ -116,6 +106,7 @@ class ZikFixtures extends Fixture
                 ->setArtiste($randomArtiste)
                 ->addStyle($styles[array_rand($styles)])
                 ->setCreatedAt($randomDateTime);
+
             $manager->persist($album);
 
             // Génération d'un nombre aléatoire de morceaux par album (entre 5 et 12)
@@ -124,7 +115,6 @@ class ZikFixtures extends Fixture
                 $randomHours = rand(2, 8);
                 $randomMinutes = rand(0, 59);
 
-                // Vérifier si l'heure aléatoire est égale à 8 et limiter les minutes à 45 dans ce cas
                 if ($randomHours === 8) {
                     $randomMinutes = rand(0, 45);
                 }

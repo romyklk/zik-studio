@@ -39,7 +39,9 @@
 
 	<div class="container">
 		<div class="table-responsive">
-		<a href="{{ path('app_admin_artiste_add') }} " class="btn btn-outline-info btn-sm mb-3"> <i class="bi bi-plus-circle"></i> Ajouter un artiste</a>
+			<a href="{{ path('app_admin_artiste_add') }} " class="btn btn-outline-info btn-sm mb-3">
+				<i class="bi bi-plus-circle"></i>
+				Ajouter un artiste</a>
 			<table class="table text-white border">
 				<thead class="bg-dark text-white text-center">
 					<tr>
@@ -84,15 +86,17 @@
 								</a>
 							</td>
 							<td>
-								<a href="{{ path('app_admin_artiste_edit', {'id': artiste.id}) }} " class="btn btn-outline-warning btn-sm">
+								<a href="{{ path('app_admin_artiste_edit', {'slug': artiste.slug}) }} " class="btn btn-outline-warning btn-sm">
 									<i class="bi bi-pencil-square"></i>
 								</a>
-								{# <a href=" {{ path('app_admin_artiste_delete', {'id': artiste.id}) }} " class="btn btn-outline-danger btn-sm">
-								<i class="bi bi-trash"></i>
-								</a>#}
 
 
-								<a href="" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modalDelete" data-bs-target="#exampleModal">
+								<a href="{{ path('app_admin_artiste_delete', {'slug': artiste.slug}) }}" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" 
+								data-bs-target="#modalDelete" 
+								data-bs-titre="Supprimer un artiste" 
+								data-bs-message="Êtes-vous sûr de vouloir supprimer l'artiste <em><strong>{{ artiste.nom }}</em></strong> ?" 
+								data-bs-button="Oui" 
+								data-bs-url="{{ path('app_admin_artiste_delete', {'slug': artiste.slug}) }}">
 									<i class="bi bi-trash"></i>
 								</a>
 
@@ -109,4 +113,6 @@
 			</ul>
 		</div>
 	</div>
+	{% include "partials/modal.html.twig" %}
+
 {% endblock %}
